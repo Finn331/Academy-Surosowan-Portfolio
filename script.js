@@ -100,6 +100,16 @@ function initEntryAnimations() {
   const mm = gsap.matchMedia();
 
   mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Set initial invisible states
+    gsap.set('.card', { opacity: 0, y: 30 });
+    gsap.set('.badge', { opacity: 0, y: -8 });
+    gsap.set('.name', { opacity: 0, y: 12 });
+    gsap.set('.bio', { opacity: 0, y: 10 });
+    gsap.set('.stats', { opacity: 0, y: 10, scale: 0.98 });
+    gsap.set('.section-label', { scaleX: 0, transformOrigin: 'left center' });
+    gsap.set('.link-card', { opacity: 0, y: 24 });
+    gsap.set('.footer', { opacity: 0, y: 16 });
+
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     // Card entry
@@ -120,56 +130,51 @@ function initEntryAnimations() {
       ease: 'power2.inOut',
     }, '-=0.5')
     // Badge stagger
-    .from('.badge', {
-      opacity: 0,
-      y: -8,
+    .to('.badge', {
+      opacity: 1,
+      y: 0,
       stagger: 0.08,
       duration: 0.5,
     }, '-=0.6')
     // Name
-    .from('.name', {
-      opacity: 0,
-      y: 12,
+    .to('.name', {
+      opacity: 1,
+      y: 0,
       duration: 0.6,
     }, '-=0.4')
     // Bio
-    .from('.bio', {
-      opacity: 0,
-      y: 10,
+    .to('.bio', {
+      opacity: 1,
+      y: 0,
       duration: 0.5,
     }, '-=0.3')
     // Stats
-    .from('.stats', {
-      opacity: 0,
-      y: 10,
-      scale: 0.98,
+    .to('.stats', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
       duration: 0.6,
     }, '-=0.2')
-    // Section label
-    .from('.section-label', {
-      opacity: 1,
-      scaleX: 0,
-      duration: 0.5,
+    // Section label - animate scale open
+    .to('.section-label', {
+      scaleX: 1,
+      duration: 0.6,
       ease: 'power2.inOut',
       transformOrigin: 'left center',
     }, '+=0.1')
-    .to('.section-label', {
-      opacity: 1,
-      duration: 0.1,
-    }, '-=0.4')
     // Link cards stagger
-    .from('.link-card', {
-      opacity: 0,
-      y: 24,
+    .to('.link-card', {
+      opacity: 1,
+      y: 0,
       stagger: 0.06,
       duration: 0.6,
       ease: 'back.out(1.5)',
       clearProps: 'transform',
     }, '-=0.2')
     // Footer
-    .from('.footer', {
-      opacity: 0,
-      y: 16,
+    .to('.footer', {
+      opacity: 1,
+      y: 0,
       duration: 0.6,
     }, '-=0.1');
   });
