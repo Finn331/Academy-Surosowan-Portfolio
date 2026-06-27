@@ -202,23 +202,26 @@ function initTypingEffect() {
     const target = roles[roleIndex];
 
     if (!isDeleting) {
-      currentText = target.substring(0, charIndex + 1);
       charIndex++;
+      currentText = target.substring(0, charIndex);
+      el.textContent = currentText;
+
       if (charIndex === target.length) {
-        setTimeout(() => { isDeleting = true; type(); }, 2000);
+        setTimeout(() => { isDeleting = true; type(); }, 2200);
         return;
       }
     } else {
-      currentText = target.substring(0, charIndex - 1);
       charIndex--;
+      currentText = target.substring(0, charIndex);
+      el.textContent = currentText;
+
       if (charIndex === 0) {
         isDeleting = false;
         roleIndex = (roleIndex + 1) % roles.length;
       }
     }
 
-    el.textContent = currentText;
-    const speed = isDeleting ? 30 : 50 + Math.random() * 30;
+    const speed = isDeleting ? 30 : 50 + Math.random() * 40;
     setTimeout(type, speed);
   }
 
