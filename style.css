@@ -395,13 +395,13 @@ body {
   gap: 10px;
 }
 
-/* --- Link Card (Styled as Distinct Buttons) --- */
+/* --- Link Card (Distinct Looking Buttons) --- */
 .link-card {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 15px 18px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(139, 92, 246, 0.03));
+  padding: 16px 18px;
+  background: var(--bg-elevated);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
   text-decoration: none;
@@ -410,46 +410,41 @@ body {
   font-weight: 500;
   cursor: pointer;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   opacity: 0;
   transform: translateY(20px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* Accent color left border indicator */
+/* Subtle gradient overlay on top of solid bg */
 .link-card::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 20%;
-  height: 60%;
-  width: 3px;
-  background: var(--accent);
-  border-radius: 0 3px 3px 0;
-  opacity: 0.4;
-  transition: all 0.3s ease;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), transparent 60%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .link-card:hover,
 .link-card:focus-visible {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.06));
-  border-color: var(--border-strong);
+  background: #1e2030;
+  border-color: rgba(99, 102, 241, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.12), 0 1px 4px rgba(0,0,0,0.25);
+  box-shadow:
+    0 8px 30px rgba(99, 102, 241, 0.15),
+    0 2px 8px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(99, 102, 241, 0.08);
 }
 
 .link-card:hover::before {
-  opacity: 1;
-  height: 80%;
-  top: 10%;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent-glow);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), transparent 60%);
 }
 
 .link-card:active {
   transform: translateY(0px) scale(0.98);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
 .link-card:focus-visible {
@@ -457,15 +452,15 @@ body {
   outline-offset: 2px;
 }
 
-/* Inductive arrow hint at right edge */
+/* Arrow icon at right edge */
 .link-card::after {
   content: '';
   position: absolute;
-  right: 16px;
+  right: 18px;
   top: 50%;
   transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-right: 2px solid var(--text-tertiary);
   border-top: 2px solid var(--text-tertiary);
   rotate: 45deg;
@@ -474,7 +469,7 @@ body {
 }
 
 .link-card:hover::after {
-  right: 14px;
+  right: 16px;
   border-color: var(--accent);
   opacity: 1;
 }
@@ -486,16 +481,18 @@ body {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-sm);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.12);
   flex-shrink: 0;
   color: var(--accent);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .link-card:hover .link-icon-wrapper {
   background: rgba(99, 102, 241, 0.18);
-  border-color: var(--accent);
+  border-color: rgba(99, 102, 241, 0.3);
   transform: scale(1.08);
 }
 
@@ -511,7 +508,9 @@ body {
   flex-direction: column;
   gap: 2px;
   min-width: 0;
-  padding-right: 24px;
+  padding-right: 28px;
+  position: relative;
+  z-index: 1;
 }
 
 .link-name {
@@ -523,7 +522,6 @@ body {
 
 .link-card:hover .link-name {
   color: #fff;
-  text-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
 }
 
 .link-meta {
