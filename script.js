@@ -300,20 +300,16 @@ function initMagneticHover() {
   const mm = gsap.matchMedia();
   mm.add('(prefers-reduced-motion: no-preference)', () => {
     cards.forEach(card => {
-      const arrow = card.querySelector('.link-arrow');
-
       card.addEventListener('mouseenter', () => {
-        gsap.to(arrow, {
-          x: 4,
-          scale: 1.15,
+        gsap.to(card, {
+          scale: 1.01,
           duration: 0.35,
-          ease: 'back.out(2)',
+          ease: 'back.out(1.4)',
         });
       });
 
       card.addEventListener('mouseleave', () => {
-        gsap.to(arrow, {
-          x: 0,
+        gsap.to(card, {
           scale: 1,
           duration: 0.35,
           ease: 'power2.out',

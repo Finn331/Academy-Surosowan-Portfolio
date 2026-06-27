@@ -395,14 +395,14 @@ body {
   gap: 10px;
 }
 
-/* --- Link Card --- */
+/* --- Link Card (Styled as Distinct Buttons) --- */
 .link-card {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+  gap: 12px;
+  padding: 15px 18px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(139, 92, 246, 0.03));
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
   text-decoration: none;
   color: var(--text-primary);
@@ -410,39 +410,46 @@ body {
   font-weight: 500;
   cursor: pointer;
   position: relative;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   opacity: 0;
   transform: translateY(20px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  letter-spacing: 0.01em;
 }
 
+/* Accent color left border indicator */
 .link-card::before {
   content: '';
   position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    rgba(99, 102, 241, 0.08),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 0 3px 3px 0;
+  opacity: 0.4;
+  transition: all 0.3s ease;
 }
 
 .link-card:hover,
 .link-card:focus-visible {
-  background: var(--bg-hover);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.06));
   border-color: var(--border-strong);
-  transform: translateX(4px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.12), 0 1px 4px rgba(0,0,0,0.25);
 }
 
 .link-card:hover::before {
   opacity: 1;
+  height: 80%;
+  top: 10%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
 .link-card:active {
-  transform: translateX(4px) scale(0.99);
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .link-card:focus-visible {
@@ -450,14 +457,36 @@ body {
   outline-offset: 2px;
 }
 
+/* Inductive arrow hint at right edge */
+.link-card::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid var(--text-tertiary);
+  border-top: 2px solid var(--text-tertiary);
+  rotate: 45deg;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.link-card:hover::after {
+  right: 14px;
+  border-color: var(--accent);
+  opacity: 1;
+}
+
 .link-icon-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-sm);
-  background: rgba(99, 102, 241, 0.08);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   flex-shrink: 0;
   color: var(--accent);
@@ -465,9 +494,9 @@ body {
 }
 
 .link-card:hover .link-icon-wrapper {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: var(--border-medium);
-  transform: scale(1.05);
+  background: rgba(99, 102, 241, 0.18);
+  border-color: var(--accent);
+  transform: scale(1.08);
 }
 
 /* Per-platform icon colors */
@@ -482,16 +511,19 @@ body {
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  padding-right: 24px;
 }
 
 .link-name {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
+  font-size: 0.9375rem;
   transition: color 0.2s;
 }
 
 .link-card:hover .link-name {
   color: #fff;
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
 }
 
 .link-meta {
@@ -500,25 +532,12 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 400;
 }
 
+/* Remove old arrow element - replaced by ::after pseudo */
 .link-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(99, 102, 241, 0.06);
-  flex-shrink: 0;
-  color: var(--text-tertiary);
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.link-card:hover .link-arrow {
-  background: rgba(99, 102, 241, 0.15);
-  color: var(--accent);
-  transform: translateX(3px) scale(1.1);
+  display: none;
 }
 
 /* --- Link card hover magnetic --- */
